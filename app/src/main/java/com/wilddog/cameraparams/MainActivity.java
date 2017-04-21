@@ -11,6 +11,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
      public static final String TAG = "Camera Params";
+    Camera camera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
         getCameraParams();
     }
     private void getCameraParams(){
-        Camera camera;
+
         int cameraCount = Camera.getNumberOfCameras();
         Log.e(TAG, Build.MODEL+"cameraCount:"+cameraCount);
-        for(int i =0;i<cameraCount;i++){
+      /*  for(int i =0;i<cameraCount;i++){*/
+      int i;
             try{
+                i=1;
             camera = Camera.open(i);
             camera.lock();
                 Camera.CameraInfo info = new Camera.CameraInfo();
@@ -53,9 +56,12 @@ public class MainActivity extends AppCompatActivity {
             camera=null;}
             catch (Exception e){
                 // 部分手机会出错
-                Log.e(TAG,"camera"+i+"can't get camera");
+                Log.e(TAG,"camera"+1+"can't get camera");
                 e.printStackTrace();
             }
-        }
+        /*}*/
     }
+
+
+
 }
