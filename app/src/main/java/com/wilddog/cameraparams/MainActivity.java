@@ -25,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
             try{
             camera = Camera.open(i);
             camera.lock();
+                Camera.CameraInfo info = new Camera.CameraInfo();
+                Camera.getCameraInfo(i,info);
+                if(info.facing== Camera.CameraInfo.CAMERA_FACING_FRONT){
+                    Log.e(TAG,i+"is a front");
+
+                }
             Camera.Parameters parameters = camera.getParameters();
                 // 用的这个
             List<Camera.Size> supportedPreviewSizes = parameters.getSupportedPreviewSizes();
@@ -42,11 +48,13 @@ public class MainActivity extends AppCompatActivity {
                     for(int j:previewFpsRange){
                     Log.e(TAG,"camera "+i+"getSupportedPreviewFpsRange rate:"+j);}}
             camera.unlock();
+                camera.stopPreview();
             camera.release();
             camera=null;}
             catch (Exception e){
                 // 部分手机会出错
                 Log.e(TAG,"camera"+i+"can't get camera");
+                e.printStackTrace();
             }
         }
     }
